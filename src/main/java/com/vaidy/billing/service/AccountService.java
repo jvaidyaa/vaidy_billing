@@ -1,5 +1,6 @@
 package com.vaidy.billing.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -49,6 +50,10 @@ public class AccountService {
 
 	public Account getAccount(String email){
 		return (accountRepository.findAccountByEmail(email));
+	}
+	
+	public List<Account> getAccounts(){
+		return (accountRepository.findAll());
 	}
 
 	private String generateApiKey() {
