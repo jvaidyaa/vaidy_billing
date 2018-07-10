@@ -1,5 +1,7 @@
 package com.vaidy.billing.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -12,18 +14,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vaidy.billing.dto.RegisterOfferReq;
+import com.vaidy.billing.entity.Account;
 import com.vaidy.billing.entity.Offer;
+import com.vaidy.billing.service.AccountService;
 import com.vaidy.billing.service.OfferService;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.sql.*;
 
 @RestController
 public class OfferController {
 	@Autowired
-	private OfferService offerservice;
+	private OfferService offerService;
+	
+	public OfferController( OfferService offerService ) {
+		this.offerService = offerService;
+	}
+	
 	@RequestMapping(
 	
 	value = "/registeroffer",
@@ -36,49 +40,17 @@ public class OfferController {
 		//@ApiParam("Register Offer Request - This establishes an entity with the system ")
 		@Validated @RequestBody RegisterOfferReq registerRequest)
 	{
-		Offer offer = offerservice.createOffer(registerRequest);
+		Offer offer = offerService.createOffer(registerRequest);
 		return offer;
 	
 	}
-	
-
-
-	
+	@RequestMapping(value="/getOffer",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public Offer getOffer( @RequestParam(value="name") String name) {
+	{
+		Offer offer = offerService.getName(name);
+		return offer;
+	}
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
