@@ -42,48 +42,7 @@ public class OfferController {
 	}
 	
 
-	@RequestMapping(value = "/offerlisting", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	
-	@ResponseBody()
-	public ArrayList<Offer> offerListing()
-	{
-		//USING A DATABASE
-		// we're unsure at this point how to read in from a database primarily bc we don't have a database file yet
-		
-		
-		
-		//USING A FILE
-		//File stmt = new File("C:\\Users\\Anjali\\Documents\\work\\summer '18\\vaidy_billing-master\\offerListings.txt");
-		
-		
-		Scanner sc = new Scanner(file);
-		ArrayList<Offer> offerList = new ArrayList<Offer>();
-		
-		while(sc.hasNext())
-		{
-			Offer offer1 = new Offer(); // create offer object
-			//IN THE CASE THAT WE HAVE A DATABASE:
-			
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","oracle");
-			Statement stmt=con.createStatement();  
-			ResultSet rs = stmt.executeQuery("select * from emp");
-			
-			while(rs.next())
-			{
-				offer1.setName(rs.getString(1));
-				offer1.setOfferId(rs.getString(2));
-				offer1.setPrice(rs.getString(3));
-				offer1.setLang(rs.getString(4));
-				offerList.add(offer1);			
-			}
-					
-			
-		}
-		
-		return offerList;
-		
-	}
+
 	
 
 }
