@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aol.billing.service.DbTableSourcesLoader;
-import com.aol.billing.service.HandlersService;
-import com.aol.billing.service.SourcesRegistry;
+
 import com.vaidy.billing.dto.RegisterAccountReq;
 import com.vaidy.billing.entity.Account;
 import com.vaidy.billing.service.AccountService;
 
 
 //import io.swagger.annotations.ApiParam;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AccountController {
 
@@ -36,7 +34,7 @@ public class AccountController {
 
 	}
 
-	
+		
 	@RequestMapping(
 			value = "/register",
 			method = RequestMethod.POST,
@@ -69,7 +67,9 @@ public class AccountController {
 	{
 		//String email = "vaidy1@abc.com";
 		 List<Account> laccs =  accountService.getAccounts();
-		 return (Account[])laccs.toArray();
+
+		 Account[] acctArray = (Account[]) laccs.toArray(new Account[laccs.size()]);
+		 return acctArray;
 
 	}
 	}

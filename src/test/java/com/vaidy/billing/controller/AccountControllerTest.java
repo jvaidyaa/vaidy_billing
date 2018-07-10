@@ -1,6 +1,7 @@
 package com.vaidy.billing.controller;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import org.junit.Before;
@@ -34,6 +35,15 @@ public class AccountControllerTest {
 		mockController.perform(post("http://localhost:8080/register").content("{\"email\": \"vaidy1@abc.com\",\"guid\":\"1234hh\", \"merchant\":\"vaidy\"}").contentType("application/json")).andExpect(MockMvcResultMatchers.status().isOk());
 		
 		
+	}
+	
+	@Test
+	public void getAccounts() throws Exception{
+		com.vaidy.billing.entity.Account retAccount = new com.vaidy.billing.entity.Account();
+		retAccount.setId("asassad");
+
+		
+		mockController.perform(get("http://localhost:8080/getAccounts"));
 	}
 	
 	
