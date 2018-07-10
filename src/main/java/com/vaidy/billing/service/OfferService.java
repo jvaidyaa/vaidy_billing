@@ -1,6 +1,8 @@
 package com.vaidy.billing.service;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vaidy.billing.dto.RegisterOfferReq;
+import com.vaidy.billing.entity.Account;
 import com.vaidy.billing.entity.Offer;
+import com.vaidy.billing.repository.OfferRepository;
 @SpringBootApplication
 @ComponentScan({"com.vaidy.billing.service"})
 @EntityScan("com.vaidy.billing.entity")
 public class OfferService {
 	@Autowired
+	private OfferRepository offerRepository;
 	
 	static Logger log = LoggerFactory.getLogger(OfferService.class);
 	
@@ -31,5 +36,12 @@ public class OfferService {
 		System.out.println(offer.toString());
 		return retOffer;
 	}
+	public Offer getName(String name){
+		return (offerRepository.findOfferByName(name));
+	}
+	public List<Offer> getOffers(){
+		return (offerRepository.findAll());
+}
+	
 
 }
