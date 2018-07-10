@@ -1,6 +1,7 @@
 package com.vaidy.billing.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -52,5 +53,17 @@ public class OfferController {
 		return offer;
 	}
 	}
+	@RequestMapping(value="/getOffers",    method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public Offer[] getOffers( ) {
+	{
+		//String email = "vaidy1@abc.com";
+		 List<Offer> loffs =  offerService.getOffers();
+
+		 Offer[] offerArray = (Offer[]) loffs.toArray(new Offer[loffs.size()]);
+		 return offerArray;
+
+	}
+}
 
 }
