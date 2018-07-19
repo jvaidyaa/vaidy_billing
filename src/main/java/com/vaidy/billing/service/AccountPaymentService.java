@@ -28,6 +28,7 @@ public class AccountPaymentService {
 	public AccountPayment createAccountPaymentInfo(RegisterAccountPaymentReq request) {
 		AccountPayment retAccountPayment = null;
 		AccountPayment accountpayment = new AccountPayment();
+		accountpayment.setAccountId(request.getAccountId());
 		accountpayment.setFirstName(request.getFirstName());
 		accountpayment.setMiddleName(request.getMiddleName());
 		accountpayment.setLastName(request.getLastName());
