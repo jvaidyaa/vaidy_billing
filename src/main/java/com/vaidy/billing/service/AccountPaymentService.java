@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vaidy.billing.controller.AccountController;
-import com.vaidy.billing.dto.RegisterAccountPaymentReq;
+import com.vaidy.billing.dto.CreateAccountPaymentReq;
 import com.vaidy.billing.entity.AccountPayment;
+import com.vaidy.billing.exception.AccountRegistrationException;
 import com.vaidy.billing.repository.AccountPaymentRepository;
 import com.vaidy.billing.service.AccountService;
 
@@ -25,7 +26,7 @@ public class AccountPaymentService {
 	static Logger log = LoggerFactory.getLogger(AccountService.class);
 	
 	@Transactional()
-	public AccountPayment createAccountPaymentInfo(RegisterAccountPaymentReq request) {
+	public AccountPayment createPaymentMethod(CreateAccountPaymentReq request) {
 		AccountPayment retAccountPayment = null;
 		AccountPayment accountpayment = new AccountPayment();
 		accountpayment.setAccountId(request.getAccountId());
@@ -40,6 +41,13 @@ public class AccountPaymentService {
 		accountpayment.setZip(request.getZip());
 		accountpayment.setCountry(request.getCountry());
 		System.out.println(accountpayment.toString());
+		
+
+		try{
+			retAccountPayment = accountPaymentRepository.save(accountpayment);
+		}catch (Exception exception) {
+			throw new AccountRegistrationException("Account ID'" + request.getAccountId() + "' already in use");
+		}
 
 		return retAccountPayment;		
 		
