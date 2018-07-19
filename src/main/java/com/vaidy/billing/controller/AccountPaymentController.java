@@ -1,7 +1,6 @@
 package com.vaidy.billing.controller;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vaidy.billing.dto.RegisterAccountPaymentReq;
+import com.vaidy.billing.dto.CreateAccountPaymentReq;
 import com.vaidy.billing.entity.AccountPayment;
 import com.vaidy.billing.service.AccountPaymentService;
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,7 +28,7 @@ public class AccountPaymentController {
 	
 	@RequestMapping(
 	
-	value = "/accountpaymentinfo",
+	value = "/createPaymentMethof",
 	method = RequestMethod.POST, 
 	consumes = MediaType.APPLICATION_JSON_VALUE,
 	produces = MediaType.APPLICATION_JSON_VALUE
@@ -37,9 +36,9 @@ public class AccountPaymentController {
 	@ResponseBody()
 	public AccountPayment registerOffer(
 		//@ApiParam("Register Offer Request - This establishes an entity with the system ")
-		@Validated @RequestBody RegisterAccountPaymentReq registerRequest)
+		@Validated @RequestBody CreateAccountPaymentReq registerRequest)
 	{
-		AccountPayment accpayment = apService.createAccountPaymentInfo(registerRequest);
+		AccountPayment accpayment = apService.createPaymentMethod(registerRequest);
 		return accpayment;
 	
 	}
