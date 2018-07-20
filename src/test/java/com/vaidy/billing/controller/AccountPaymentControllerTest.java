@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.vaidy.billing.dto.RegisterAccountPaymentReq;
+import com.vaidy.billing.dto.CreateAccountPaymentReq;
 import com.vaidy.billing.service.AccountPaymentService;
 
 public class AccountPaymentControllerTest {
@@ -31,7 +31,7 @@ public class AccountPaymentControllerTest {
 		com.vaidy.billing.entity.AccountPayment retAccount = new com.vaidy.billing.entity.AccountPayment();
 		retAccount.setAccountId("asassad");
 
-		when(accountPaymentService.createAccountPaymentInfo(createRegObject())).thenReturn(retAccount);
+		when(accountPaymentService.createPaymentMethod(createRegObject())).thenReturn(retAccount);
 		mockController.perform(post("http://localhost:8080/accountpaymentinfo").content("{\"pmid\":\"1234\", \"firstname\":\"Peter\", \"middlename\":\"John\", \"lastname\":\"Samuels\", \"street\":\"32 Gulley Way\", \"aptsuite\":\"n/a\", \"street3\":\"n/a\", \"country\":\"USA\", \"state\":\"Tennessee\", \"city\": \"Memphis\", \"zip\":\"92134\"}").contentType("application/json")).andExpect(MockMvcResultMatchers.status().isOk());
 		
 		mockController.perform(get("http://localhost:8080/getAccountPayment"));
@@ -40,8 +40,8 @@ public class AccountPaymentControllerTest {
 	
 	
 
-	private RegisterAccountPaymentReq createRegObject() {
-		RegisterAccountPaymentReq req = new RegisterAccountPaymentReq();
+	private CreateAccountPaymentReq createRegObject() {
+		CreateAccountPaymentReq req = new CreateAccountPaymentReq();
 		req.setAccountId("98134892374");
 		req.setAptSuite("n/a");
 		req.setCity("Memphis");
