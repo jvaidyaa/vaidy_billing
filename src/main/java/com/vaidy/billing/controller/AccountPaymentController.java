@@ -28,7 +28,7 @@ public class AccountPaymentController {
 	
 	@RequestMapping(
 	
-	value = "/createPaymentMethof",
+	value = "/createPaymentMethod",
 	method = RequestMethod.POST, 
 	consumes = MediaType.APPLICATION_JSON_VALUE,
 	produces = MediaType.APPLICATION_JSON_VALUE
