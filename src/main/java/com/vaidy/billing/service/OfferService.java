@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vaidy.billing.dto.RegisterOfferReq;
-import com.vaidy.billing.entity.Account;
 import com.vaidy.billing.entity.Offer;
+import com.vaidy.billing.exception.AccountRegistrationException;
 import com.vaidy.billing.repository.OfferRepository;
 @SpringBootApplication
 @ComponentScan({"com.vaidy.billing.service"})
@@ -34,6 +33,13 @@ public class OfferService {
 		offer.setPrice(request.getPrice());
 		offer.setLang(request.getLang());
 		System.out.println(offer.toString());
+		
+
+		try{
+			retOffer = offerRepository.save(offer);
+		}catch (Exception exception) {
+			throw new AccountRegistrationException("Name '" + request.getName() + "' already in use");
+		}
 		return retOffer;
 	}
 	public Offer getName(String name){
