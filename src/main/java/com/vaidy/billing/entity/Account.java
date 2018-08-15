@@ -20,10 +20,13 @@ public class Account {
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="password")
+	private String password;
+	
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", guid=" + guid + ", merchant=" + merchant + ", email=" + email +" ]";
+		return "Account [id=" + id + ", guid=" + guid + ", merchant=" + merchant + ", email=" + email + ", password= " + password + "]";
 	}
 
 
@@ -55,7 +58,7 @@ public class Account {
 	public void setMerchant(String merchant) {
 		this.merchant = merchant;
 	}
-
+	
 
 	public String getEmail() {
 		return email;
@@ -66,6 +69,14 @@ public class Account {
 		this.email = email;
 	}
 
-
 	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 }
