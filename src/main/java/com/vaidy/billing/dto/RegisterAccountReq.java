@@ -13,10 +13,11 @@ public class RegisterAccountReq {
 	@JsonProperty(value = "email")
 	private String email;
 
-
 	@JsonProperty(value = "merchant")
 	private String merchant;
 
+	@JsonProperty(value = "password")
+	private String password;
 
 	public String getGuid() {
 		return guid;
@@ -46,6 +47,16 @@ public class RegisterAccountReq {
 	public void setMerchant(String merchant) {
 		this.merchant = merchant;
 	}
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 
 }
